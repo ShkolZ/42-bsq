@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/20 21:09:34 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/21 01:14:19 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_foo.h"
+#include <fcntl.h>
 
-int	validate_args(int argc, char **argv)
+int	check_stdin(int argc, char **argv)
 {
-	if (argc > 1) //how to read the STDIN, handle 
-	{
-		write(1, "Error\n", 6);
-		return (0);
-	}
-	if ()
-	return (1);
+	if (argc < 2) //how to read the STDIN, handle 
+		return (1);
+	return (0);
+}
+
+int	open_with_error(char *filename)
+{
+	
 }

@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/21 01:05:57 by vbertych         ###   ########.fr       */
+/*   Created: 2026/07/21 00:52:11 by vbertych          #+#    #+#             */
+/*   Updated: 2026/07/21 01:31:14 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_foo.h"
 
-int	main(int argc, char **argv)
+char	**make_map(char *filename, int fd)
 {
-	int		i;
-	char	**map;
-	int		is_stdin;
-
-	i = 1;
-	is_stdin = check_stdin(argc, argv);
-	if (is_stdin)
-	{
-		map = make_map(argv[i], is_stdin);
-		find_largest(map);
-	}
-	else
-	{
-		while (i < argc)
-		{
-			map = make_map(argv[i], is_stdin);
-			find_largest(map);
-		}
-	}
+	
 }
-
-
-// parse the map to char **map
-// go through map making squares
-// output the largest one
