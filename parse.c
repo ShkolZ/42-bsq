@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
 
 int	ft_strlen(char *str)
 {
@@ -31,11 +32,35 @@ int	ft_atoi(char *str)
 char	*get_next_line(int fd)
 {
 	char	*line;
+	char	c;
 	int		len;
-	int		bytes;
-	//malloc line
-	//grab line from fd as char *
-
+	ssize_t	bytes;
+	//malloc line for int_max, read chars one by one byte into char *line.
+	line = malloc(sizeof(char) * INT_MAX);
+	if (!line)
+		return (NULL);
+	len = 0;
+	while (len < INT_MAX - 1)
+	{
+		bytes = read(fd, &c, 1);
+		if (bytes < 0)
+		{
+			free(line);
+			return (NULL);
+		}
+		if (bytes == 0)
+			break ;
+		line[len] = c;
+		len++;
+		if (c == '\n')
+			break ;
+	}
+	if (len == 0)
+	{
+		free(line);
+		return (NULL);
+	}
+	line[len] = '\0';
 	return (line);
 }
 
@@ -52,11 +77,15 @@ int	row_len(char *line)
 int	valid_row(char *line, int len, t_map *map)
 {
 	int	i;
-	//finish function.
+
+	if (line[len] != '\n')
+		return (0);
 	i = 0;
 	while (i < len)
 	{
-
+		if (line[i] != map->empty && line[i] != map->obstacle)
+			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -96,7 +125,11 @@ int	read_header(int fd, t_map *map)
 	map->height = ft_atoi(line);
 	map->empty = line[len - 4];
 	map->obstacle = line[len - 3];
-	if (map->height <= 0 || map->empty == map->obstacle)
+	map->fill = line[len - 2];
+	if (map->height <= 0 
+		|| map->empty == map->obstacle
+		|| map->emtpy == map_fill
+		|| map->obstacle == map->fill)
 	{
 		free(line);
 		return (0);
@@ -136,7 +169,7 @@ char	**build_map(int fd, t_map *map, t_gc **gc)
 			return (NULL);
 		row++;
 	}
-	grid[row] = NULL; //needed?
+	grid[row] = '\0';
 	return (grid);
 }
 
