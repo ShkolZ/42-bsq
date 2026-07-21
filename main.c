@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/21 01:54:55 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 00:50:59 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	char	**map;
-	int		is_stdin;
-	t_gc	*gc;
-	
+	int			i;
+	char		**map;
+	int			is_stdin;
+	t_gc		*gc;
+	t_square	square;
 
 	gc = NULL;
 	i = 1;
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	if (is_stdin)
 	{
 		map = make_map(argv[i], is_stdin);
-		square = find_largest(map, &gc);
+		square = find_largest(map);
 	}
 	else
 	{
