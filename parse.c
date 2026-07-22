@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
+/*   Updated: 2026/07/22 02:14:48 by reyam            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_foo.h"
 #include <fcntl.h>
 #include <stdlib.h>
@@ -138,15 +150,14 @@ int	read_header(int fd, t_map *map)
 	return (1);
 }
 
-char	**build_map(int fd, t_map *map, t_gc **gc)
+int	**build_map(int fd, t_map *map, t_gc **gc)
 {
-	char	**grid;
 	char	*line;
 	int		row;
 	int		len;
 
-	grid = gc_malloc(gc, sizeof(char *) * (map->height + 1));
-	if (!grid)
+	map->arr = gc_malloc(gc, sizeof(char *) * (map->height + 1));
+	if (!map->arr)
 		return (NULL);
 	row = 0;
 	while (row < map->height)
@@ -163,30 +174,35 @@ char	**build_map(int fd, t_map *map, t_gc **gc)
 			free(line);
 			return (NULL);
 		}
-		grid[row] = copy_row(line, len, gc);
+		map->arr[row] = copy_row(line, len, gc);
 		free(line);
-		if (!grid[row])
+		if (!map->arr[row])
 			return (NULL);
 		row++;
 	}
-	grid[row] = '\0';
-	return (grid);
+	map->arr[row] = '\0';
+	return (1);
 }
 
-char	**open_map(char *filename, t_map *map, t_gc **gc)
+int	**open_map(char *filename, t_map *map, t_gc **gc)
 {
 	char	**grid;
 	int		fd;
 
+	map->arr = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+		return (0);
 	if (!read_header(fd, map))
 	{
 		close(fd);
-		return (NULL);
+		return (0);
 	}
-	grid = build_map(fd, map, gc);
+	if (!build_map(fd, map, gc))
+	{
+		close(fd);
+		return (0);
+	}
 	close(fd);
-	return (grid);
+	return (1);
 }
