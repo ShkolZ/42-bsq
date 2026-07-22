@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 02:16:00 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/22 19:27:04 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	map_fill(t_map *map, t_square *square)
 void	print_map(t_map *map)
 {
 	int	row;
+	row = 0;
 
 	while (row < map->height)
 	{
@@ -40,4 +41,10 @@ void	print_map(t_map *map)
 		write(1, "\n", 1);
 		row++;
 	}
+}
+
+void	print_out(t_map *map, t_square *square)
+{
+	map_fill(map, square);
+	print_map(map);
 }

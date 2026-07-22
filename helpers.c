@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 03:17:04 by vbertych          #+#    #+#             */
-/*   Updated: 2026/07/22 00:38:19 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:02:38 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@ int	in_boundaries(t_point point, t_map *map)
 
 int	is_obstacle(t_point point, t_map *map)
 {
+	// printf("map char at point ")
 	if (map->arr[point.row][point.col] == map->obstacle)
 		return (1);
 	return (0);
+}
+
+void	increment_point(t_point *point, int amount)
+{
+	point->col += amount;
+	point->row += amount;
 }

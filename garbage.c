@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/21 03:10:09 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:05:46 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ void	gc_free_all(t_gc **gc)
 	*gc = NULL;
 }
 
-void	free_square(t_square *sq)
-{
-	int	i;
+// void	free_square(t_square *sq)
+// {
+// 	int	i;
 
-	i = 0;
-	while (sq->arr[i] != NULL)
-	{
-		free(sq->arr[i]);
-		i++;
-	}
-	if (sq->arr != NULL)
-		free(sq->arr);
-	free(sq);
-}
+// 	i = 0;
+// 	while (sq->arr[i] != NULL)
+// 	{
+// 		free(sq->arr[i]);
+// 		i++;
+// 	}
+// 	if (sq->arr != NULL)
+// 		free(sq->arr);
+// 	free(sq);
+// }

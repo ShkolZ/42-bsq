@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 02:14:48 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/22 18:29:25 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	read_header(int fd, t_map *map)
 	map->fill = line[len - 2];
 	if (map->height <= 0 
 		|| map->empty == map->obstacle
-		|| map->emtpy == map_fill
+		|| map->empty == map->fill
 		|| map->obstacle == map->fill)
 	{
 		free(line);
@@ -150,7 +150,7 @@ int	read_header(int fd, t_map *map)
 	return (1);
 }
 
-int	**build_map(int fd, t_map *map, t_gc **gc)
+int	build_map(int fd, t_map *map, t_gc **gc)
 {
 	char	*line;
 	int		row;
@@ -158,13 +158,15 @@ int	**build_map(int fd, t_map *map, t_gc **gc)
 
 	map->arr = gc_malloc(gc, sizeof(char *) * (map->height + 1));
 	if (!map->arr)
-		return (NULL);
+		return (0);
 	row = 0;
+	printf("build_map 1\n");
 	while (row < map->height)
 	{
+		printf("build_map loop\n");
 		line = get_next_line(fd);
 		if (!line)
-			return (NULL);
+			return (0);
 		len = row_len(line);
 		if (row == 0)
 			map->len = len;
@@ -172,23 +174,24 @@ int	**build_map(int fd, t_map *map, t_gc **gc)
 			|| !valid_row(line, len, map))
 		{
 			free(line);
-			return (NULL);
+			return (0);
 		}
 		map->arr[row] = copy_row(line, len, gc);
 		free(line);
 		if (!map->arr[row])
-			return (NULL);
+			return (0);
 		row++;
 	}
+	printf("out of loop\n");
 	map->arr[row] = '\0';
 	return (1);
 }
 
-int	**open_map(char *filename, t_map *map, t_gc **gc)
+int	open_map(char *filename, t_map *map, t_gc **gc)
 {
 	char	**grid;
 	int		fd;
-
+	printf("open_map\n");
 	map->arr = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -204,5 +207,6 @@ int	**open_map(char *filename, t_map *map, t_gc **gc)
 		return (0);
 	}
 	close(fd);
+	printf("out of open map\n");
 	return (1);
 }

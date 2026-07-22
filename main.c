@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 00:50:59 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:36:05 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,30 @@
 int	main(int argc, char **argv)
 {
 	int			i;
-	char		**map;
+	t_map		map;
 	int			is_stdin;
 	t_gc		*gc;
 	t_square	square;
 
 	gc = NULL;
 	i = 1;
-	is_stdin = check_stdin(argc, argv);
-	if (is_stdin)
-	{
-		map = make_map(argv[i], is_stdin);
-		square = find_largest(map);
-	}
-	else
-	{
+	// is_stdin = check_stdin(argc, argv);
+	// if (is_stdin)
+	// {
+	// 	map = make_map(argv[i], is_stdin);
+	// 	square = find_largest(map);
+	// }
+	// else
+	// {
 		while (i < argc)
 		{
-			map = make_map(argv[i], is_stdin);
-			find_largest(map);
+			printf("%d\n", open_map(argv[i], &map, &gc));
+			
+			printf("zalupa\n");
+			square = find_largest(&map);
+			print_out(&map, &square);
+			i++;
 		}
-	}
 }
 
 

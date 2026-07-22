@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 00:49:56 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 18:19:00 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ t_point		make_point(int row, int col);
 int			in_boundaries(t_point point, t_map *map);
 int			is_obstacle(t_point point, t_map *map);
 t_square	find_largest(t_map *map);
+void		increment_point(t_point *point, int amount);
+void		print_out(t_map *map, t_square *square);
+int			open_map(char *filename, t_map *map, t_gc **gc);
 
 
 #endif
