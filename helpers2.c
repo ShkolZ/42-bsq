@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   helpers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 22:02:41 by vbertych         ###   ########.fr       */
+/*   Created: 2026/07/22 22:42:41 by vbertych          #+#    #+#             */
+/*   Updated: 2026/07/22 22:43:19 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
-#include <fcntl.h>
+#include "ft_foo.h"
 
-int	is_stdin(int argc)
+int	is_closer(t_point a, t_point b)
 {
-	if (argc < 2)
+	if (a.row < b.row)
+		return (1);
+	if (a.row == b.row && a.col < b.col)
 		return (1);
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_foo.h"
+#include "bsq.h"
 
 
 int	main(int argc, char **argv)
@@ -41,7 +41,6 @@ int	main(int argc, char **argv)
 		{
 			fd = open(argv[i], O_RDONLY);
 			open_map(fd, &map, &gc);
-			printf("zalupa\n");
 			square = find_largest(&map);
 			print_out(&map, &square);
 			gc_free_all(&gc);

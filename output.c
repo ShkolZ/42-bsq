@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_foo.h"
+#include "bsq.h"
 
 void	map_fill(t_map *map, t_square *square)
 {

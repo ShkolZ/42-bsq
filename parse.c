@@ -3,16 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 22:46:58 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/22 23:37:56 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_foo.h"
+#include "bsq.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <limits.h>
 
-//malloc line for int_max, read chars one by one byte into char *line.
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	nbr;
+
+	i = 0;
+	nbr = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nbr = nbr * 10 + (str[i] - '0');
+		i++;
+	}
+	return (nbr);
+}
+
 char	*get_next_line(int fd)
 {
 	char	*line;
@@ -108,10 +136,8 @@ int	build_map(int fd, t_map *map, t_gc **gc)
 	if (!map->arr)
 		return (0);
 	row = 0;
-	printf("build_map 1\n");
 	while (row < map->height)
 	{
-		printf("build_map loop\n");
 		line = get_next_line(fd);
 		if (!line)
 			return (0);
@@ -130,7 +156,6 @@ int	build_map(int fd, t_map *map, t_gc **gc)
 			return (0);
 		row++;
 	}
-	printf("out of loop\n");
 	map->arr[row] = '\0';
 	return (1);
 }
@@ -152,6 +177,5 @@ int	open_map(int fd, t_map *map, t_gc **gc)
 		return (0);
 	}
 	close(fd);
-	printf("out of open map\n");
 	return (1);
 }

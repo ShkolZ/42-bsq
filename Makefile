@@ -1,4 +1,4 @@
-NAME = rush02
+NAME = bsq
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -6,12 +6,14 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	main.c \
 		garbage.c \
 		parse.c \
-		parse_helper.c \
-		error_handle.c
+		helpers.c \
+		square.c \
+		output.c \
+		error.c
 
 OBJS = $(SRCS:.c=.o)
 
-HEADERS = ft_foo.h
+HEADERS = bsq.h
 
 all: $(NAME)
 

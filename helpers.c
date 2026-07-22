@@ -6,11 +6,11 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/21 03:17:04 by vbertych          #+#    #+#             */
-/*   Updated: 2026/07/22 22:16:56 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 22:40:20 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_foo.h"
+#include "bsq.h"
 
 int	ft_abs(int n)
 {
@@ -38,7 +38,6 @@ int	in_boundaries(t_point point, t_map *map)
 
 int	is_obstacle(t_point point, t_map *map)
 {
-	// map->arr[point.row][point.col]
 	if (map->arr[point.row][point.col] == map->obstacle)
 		return (1);
 	return (0);
