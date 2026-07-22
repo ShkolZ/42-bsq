@@ -6,7 +6,10 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	main.c \
 		garbage.c \
 		parse.c \
+		parse2.c \
+		parse3.c \
 		helpers.c \
+		helpers2.c \
 		square.c \
 		output.c \
 		error.c

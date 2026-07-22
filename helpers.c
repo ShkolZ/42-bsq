@@ -48,12 +48,3 @@ void	increment_point(t_point *point, int amount)
 	point->col += amount;
 	point->row += amount;
 }
-
-int	is_closer(t_point a, t_point b)
-{
-	if (a.row < b.row)
-		return (1);
-	if (a.row == b.row && a.col < b.col)
-		return (1);
-	return (0);
-}

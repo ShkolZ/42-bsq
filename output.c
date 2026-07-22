@@ -33,8 +33,8 @@ void	map_fill(t_map *map, t_square *square)
 void	print_map(t_map *map)
 {
 	int	row;
-	row = 0;
 
+	row = 0;
 	while (row < map->height)
 	{
 		write(1, map->arr[row], map->len);

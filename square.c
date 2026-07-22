@@ -31,9 +31,7 @@ int	try_fill(t_point top_left, t_point bot_right, t_map *map, t_square *square)
 		while (tmp_top_left.col <= bot_right.col)
 		{
 			if (is_obstacle(tmp_top_left, map))
-			{
 				return (0);
-			}
 			tmp_top_left.col++;
 		}
 		tmp_top_left.col = top_left.col;
@@ -88,4 +86,3 @@ t_square	find_largest(t_map *map)
 	}
 	return (max_square);
 }
-

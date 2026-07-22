@@ -6,49 +6,65 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 22:37:40 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 23:28:37 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-
-int	main(int argc, char **argv)
+void	solve_map(t_map *map, t_gc **gc)
 {
-	int			i;
-	t_map		map;
-	t_gc		*gc;
 	t_square	square;
-	int			fd;
+
+	square = find_largest(map);
+	print_out(map, &square);
+	gc_free_all(gc);
+}
+
+void	run_stdin(void)
+{
+	t_map	map;
+	t_gc	*gc;
 
 	gc = NULL;
-	i = 1;
-	if (is_stdin(argc))
+	if (!open_map(0, &map, &gc))
 	{
-		if (!open_map(0, &map, &gc))
+		write(1, "map error\n", 10);
+		gc_free_all(&gc);
+		return ;
+	}
+	solve_map(&map, &gc);
+}
+
+void	run_args(int argc, char **argv)
+{
+	int		i;
+	int		fd;
+	t_map	map;
+	t_gc	*gc;
+
+	i = 1;
+	gc = NULL;
+	while (i < argc)
+	{
+		fd = open(argv[i], O_RDONLY);
+		if (!open_map(fd, &map, &gc))
 		{
 			write(1, "map error\n", 10);
 			gc_free_all(&gc);
-			return (0);
 		}
-		square = find_largest(&map);
-		print_out(&map, &square);
-		gc_free_all(&gc);
-	}
-	else
-	{
-		while (i < argc)
-		{
-			fd = open(argv[i], O_RDONLY);
-			open_map(fd, &map, &gc);
-			square = find_largest(&map);
-			print_out(&map, &square);
-			gc_free_all(&gc);
-			i++;
-		}
+		else
+			solve_map(&map, &gc);
+		write(1, "\n", 1);
+		i++;
 	}
 }
 
-// parse the map to char **map
-// go through map making squares
-// output the largest one
+int	main(int argc, char **argv)
+{
+	if (is_stdin(argc))
+		run_stdin();
+	else
+		run_args(argc, argv);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 22:40:00 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 23:13:37 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,11 @@ int			is_stdin(int argc);
 /* ------------------------------- parsing -------------------------------- */
 int			open_map(int fd, t_map *map, t_gc **gc);
 int			read_header(int fd, t_map *map);
+int			valid_header(t_map *map);
 int			build_map(int fd, t_map *map, t_gc **gc);
+int			add_row(int fd, t_map *map, t_gc **gc, int row);
 char		*get_next_line(int fd);
+int			fill_line(int fd, char *line);
 int			row_len(char *line);
 int			valid_row(char *line, int len, t_map *map);
 char		*copy_row(char *line, int len, t_gc **gc);
