@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
+/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 18:36:05 by vbertych         ###   ########.fr       */
+/*   Updated: 2026/07/22 21:57:40 by reyam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,27 @@ int	main(int argc, char **argv)
 	gc = NULL;
 	i = 1;
 	// is_stdin = check_stdin(argc, argv);
-	// if (is_stdin)
-	// {
-	// 	map = make_map(argv[i], is_stdin);
-	// 	square = find_largest(map);
-	// }
-	// else
-	// {
+	if (is_stdin)
+	{
+		open_map(0, &map, &gc);
+		square = find_largest(&map);
+		print_out(&map, &square);
+		gc_free_all(&gc);
+	}
+	else
+	{
 		while (i < argc)
 		{
-			printf("%d\n", open_map(argv[i], &map, &gc));
-			
+			fd = open(argv[i], O_RDONLY)
+			open_map(fd, &map, &gc);
 			printf("zalupa\n");
 			square = find_largest(&map);
 			print_out(&map, &square);
+			gc_free_all(&gc);
 			i++;
 		}
+	}
 }
-
 
 // parse the map to char **map
 // go through map making squares
