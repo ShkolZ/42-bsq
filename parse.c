@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 21:54:25 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/22 22:07:22 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,11 +189,8 @@ int	build_map(int fd, t_map *map, t_gc **gc)
 
 int	open_map(int fd, t_map *map, t_gc **gc)
 {
-	char	**grid;
-	int		fd;
-	printf("open_map\n");
 	map->arr = NULL;
-	
+
 	if (fd < 0)
 		return (0);
 	if (!read_header(fd, map))

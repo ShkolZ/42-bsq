@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reyam <reyam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vbertych <vbertych@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/18 19:15:55 by reyam             #+#    #+#             */
-/*   Updated: 2026/07/22 22:25:50 by reyam            ###   ########.fr       */
+/*   Updated: 2026/07/22 22:37:40 by vbertych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_foo.h"
 
+
 int	main(int argc, char **argv)
 {
 	int			i;
 	t_map		map;
-	int			is_stdin;
 	t_gc		*gc;
 	t_square	square;
+	int			fd;
 
 	gc = NULL;
 	i = 1;
-	if (is_stdin)
+	if (is_stdin(argc))
 	{
 		if (!open_map(0, &map, &gc))
 		{
@@ -38,14 +39,8 @@ int	main(int argc, char **argv)
 	{
 		while (i < argc)
 		{
-			fd = open(argv[i], O_RDONLY)
-			if (!open_map(fd, &map, &gc))
-			{
-				write(1, "map error\n", 10);
-				gc_free_all(&gc);
-				i++;
-				continue;
-			}
+			fd = open(argv[i], O_RDONLY);
+			open_map(fd, &map, &gc);
 			printf("zalupa\n");
 			square = find_largest(&map);
 			print_out(&map, &square);
